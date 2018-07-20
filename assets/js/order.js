@@ -1,10 +1,17 @@
 // Global vatiable
 var tableOrder = $('#tableOrder');
+var amountOrder = [];
 var curentId = 0;
 var strDate = '';
 
 // when website on loading will query database at firebase
 window.onload = function() {
+
+  // Get current
+  getId();
+
+  // Get current amount each order
+  getAmountOrder();
 
   // Get date
   getDateNow();
@@ -15,6 +22,48 @@ window.onload = function() {
   // Set state of input
   setState();
 
+}
+
+function getAmountOrder(){
+
+  // On Product
+  var dbProductRef = firebase.database().ref("products");
+
+  dbProductRef.once('value').then(function(dataSnap){
+    // On Product -> (key)
+
+    dataSnap.forEach(function(dataChildSnap) {
+      // On Product -> (key) -> Child
+
+      // Get key and value at child node
+      var keyValue = dataChildSnap.key;
+      var allValue = dataChildSnap.val();
+
+      // Extend value object to get infomation
+      var amount = allValue.amount;
+
+      // Push variable to array
+      amountOrder.push(amount);
+
+    });
+  });
+}
+
+function getId(){
+
+  // On Infomation
+  var dbInfoRef = firebase.database().ref("informations");
+
+  dbInfoRef.once('value').then(function(dataChildSnap){
+    // On Infomation -> Child
+
+    // Get key and value at child node
+    var keyValue = dataChildSnap.key;
+    var allValue = dataChildSnap.val();
+
+    // Extend value object to get infomation
+    curentId = allValue.curentId;
+  });
 }
 
 function getDataOrder(){
@@ -60,8 +109,6 @@ function getDataOrder(){
       tableOrder.append("<td>" + total + "</td>");
       tableOrder.append("<td><a class='btn btn-primary' href='#' onclick='moveOrder(" + id + ")'>done</a></td>");
       tableOrder.append("</tr>");
-
-      curentId = id;
 
     });
   });
@@ -170,44 +217,272 @@ function setOrder(){
 
   var input1 = document.getElementById('input1');
   var input2 = document.getElementById('input2');
+  var input3 = document.getElementById('input3');
+  var input4 = document.getElementById('input4');
+  var input5 = document.getElementById('input5');
+  var input6 = document.getElementById('input6');
+  var input7 = document.getElementById('input7');
+  var input8 = document.getElementById('input8');
+  var input9 = document.getElementById('input9');
+  var input10 = document.getElementById('input10');
+
+  var input11 = document.getElementById('input11');
+  var input12 = document.getElementById('input12');
+  var input13 = document.getElementById('input13');
+  var input14 = document.getElementById('input14');
+  var input15 = document.getElementById('input15');
+  var input16 = document.getElementById('input16');
+  var input17 = document.getElementById('input17');
+  var input18 = document.getElementById('input18');
+  var input19 = document.getElementById('input19');
+  var input20 = document.getElementById('input20');
+
+  var input21 = document.getElementById('input21');
+  var input22 = document.getElementById('input22');
+
+  var checkbox1 = document.getElementById('checkbox1');
+  var checkbox2 = document.getElementById('checkbox2');
+  var checkbox3 = document.getElementById('checkbox3');
+  var checkbox4 = document.getElementById('checkbox4');
+  var checkbox5 = document.getElementById('checkbox5');
+  var checkbox6 = document.getElementById('checkbox6');
+  var checkbox7 = document.getElementById('checkbox7');
+  var checkbox8 = document.getElementById('checkbox8');
+  var checkbox9 = document.getElementById('checkbox9');
+  var checkbox10 = document.getElementById('checkbox10');
+
+  var checkbox11 = document.getElementById('checkbox11');
+  var checkbox12 = document.getElementById('checkbox12');
+  var checkbox13 = document.getElementById('checkbox13');
+  var checkbox14 = document.getElementById('checkbox14');
+  var checkbox15 = document.getElementById('checkbox15');
+  var checkbox16 = document.getElementById('checkbox16');
+  var checkbox17 = document.getElementById('checkbox17');
+  var checkbox18 = document.getElementById('checkbox18');
+  var checkbox19 = document.getElementById('checkbox19');
+  var checkbox20 = document.getElementById('checkbox20');
+
+  var checkbox21 = document.getElementById('checkbox21');
+  var checkbox21 = document.getElementById('checkbox21');
 
   var amount = 0;
   var total = 0;
   var strOrder = '';
 
+  // On Order
+  var dbOrderRef = firebase.database().ref("orders");
+
   // Event when input order list
-  $('#checkbox1').change(function() {
-      if(this.checked) {
-        strOrder = strOrder + " order 1:" +input1.value;
-        amount = amount + parseInt(input1.value);
-      }
-      else {
-        strOrder = strOrder;
-        amount = amount;
-      }
-  });
+  if(checkbox1.checked) {
+    strOrder = strOrder + " #1:" +input1.value;
+    amount = amount + parseInt(input1.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
 
 
-  $('#checkbox2').change(function() {
-      if(this.checked) {
-        strOrder = strOrder + " order 2:" +input2.value;
-        amount = amount + parseInt(input2.value);
-      }
-      else {
-        strOrder = strOrder;
-        amount = amount;
-      }
-  });
+  if(checkbox2.checked) {
+    strOrder = strOrder + " #2:" +input2.value;
+    amount = amount + parseInt(input2.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+  if(checkbox3.checked) {
+    strOrder = strOrder + " #3:" +input3.value;
+    amount = amount + parseInt(input3.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+  if(checkbox4.checked) {
+    strOrder = strOrder + " #4:" +input4.value;
+    amount = amount + parseInt(input4.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+  if(checkbox5.checked) {
+    strOrder = strOrder + " #5:" +input5.value;
+    amount = amount + parseInt(input5.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+  if(checkbox6.checked) {
+    strOrder = strOrder + " #2:" +input6.value;
+    amount = amount + parseInt(input6.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+  if(checkbox7.checked) {
+    strOrder = strOrder + " #2:" +input7.value;
+    amount = amount + parseInt(input7.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+  if(checkbox8.checked) {
+    strOrder = strOrder + " #2:" +input8.value;
+    amount = amount + parseInt(input8.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+  if(checkbox9.checked) {
+    strOrder = strOrder + " #2:" +input9.value;
+    amount = amount + parseInt(input9.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+  if(checkbox10.checked) {
+    strOrder = strOrder + " #2:" +input10.value;
+    amount = amount + parseInt(input10.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+
+  if(checkbox11.checked) {
+    strOrder = strOrder + " #2:" +input11.value;
+    amount = amount + parseInt(input11.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+
+  if(checkbox12.checked) {
+    strOrder = strOrder + " #2:" +input12.value;
+    amount = amount + parseInt(input12.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+
+  if(checkbox13.checked) {
+    strOrder = strOrder + " #2:" +input13.value;
+    amount = amount + parseInt(input13.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+  if(checkbox14.checked) {
+    strOrder = strOrder + " #2:" +input14.value;
+    amount = amount + parseInt(input14.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+  if(checkbox15.checked) {
+    strOrder = strOrder + " #2:" +input15.value;
+    amount = amount + parseInt(input15.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+  if(checkbox16.checked) {
+    strOrder = strOrder + " #2:" +input16.value;
+    amount = amount + parseInt(input16.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+  if(checkbox17.checked) {
+    strOrder = strOrder + " #2:" +input17.value;
+    amount = amount + parseInt(input17.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+  if(checkbox18.checked) {
+    strOrder = strOrder + " #2:" +input18.value;
+    amount = amount + parseInt(input18.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+  if(checkbox19.checked) {
+    strOrder = strOrder + " #2:" +input19.value;
+    amount = amount + parseInt(input19.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+  if(checkbox20.checked) {
+    strOrder = strOrder + " #2:" +input20.value;
+    amount = amount + parseInt(input20.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+  if(checkbox21.checked) {
+    strOrder = strOrder + " #2:" +input21.value;
+    amount = amount + parseInt(input21.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
+
+  if(checkbox22.checked) {
+    strOrder = strOrder + " #2:" +input22.value;
+    amount = amount + parseInt(input22.value);
+  }
+  else {
+    strOrder = strOrder;
+    amount = amount;
+  }
 
   // Create new id
   var newCurentId = curentId + 1;
   curentId = newCurentId;
 
   // Sum total order price
-  total = 90 * amount;
-
-  // On Order
-  var dbOrderRef = firebase.database().ref("orders");
+  if (amount != 0) {
+    total = 90 * amount;
+  }
 
   // Push all data to firebase
   dbOrderRef.push({
@@ -221,8 +496,22 @@ function setOrder(){
     total: total,
   })
 
+  // Update
+  updateId();
+
   // Affter send date will show data at log again
   getDataOrder();
+}
+
+function updateId(){
+
+  // On Infomation
+  var dbInfoRef = firebase.database().ref("informations");
+
+  dbInfoRef.update({
+    curentId: curentId,
+  })
+
 }
 
 function hanndleOnChangeCheckBox(position){
