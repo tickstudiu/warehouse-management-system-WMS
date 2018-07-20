@@ -1,6 +1,7 @@
 // Global vatiable
 var tableOrder = $('#tableOrder');
-var amountOrder = [];
+var productAmount = [];
+var productTitle = [];
 var curentId = 0;
 var strDate = '';
 
@@ -10,8 +11,9 @@ window.onload = function() {
   // Get current
   getId();
 
-  // Get current amount each order
+  // Get current amount and title each order
   getAmountOrder();
+  getTitleOrder();
 
   // Get date
   getDateNow();
@@ -43,7 +45,32 @@ function getAmountOrder(){
       var amount = allValue.amount;
 
       // Push variable to array
-      amountOrder.push(amount);
+      productAmount.push(amount);
+
+    });
+  });
+}
+
+function getTitleOrder(){
+
+  // On Product
+  var dbProductRef = firebase.database().ref("products");
+
+  dbProductRef.once('value').then(function(dataSnap){
+    // On Product -> (key)
+
+    dataSnap.forEach(function(dataChildSnap) {
+      // On Product -> (key) -> Child
+
+      // Get key and value at child node
+      var keyValue = dataChildSnap.key;
+      var allValue = dataChildSnap.val();
+
+      // Extend value object to get infomation
+      var title = allValue.title;
+
+      // Push variable to array
+      productTitle.push(title);
 
     });
   });
@@ -274,8 +301,11 @@ function setOrder(){
 
   // Event when input order list
   if(checkbox1.checked) {
-    strOrder = strOrder + " #1:" +input1.value;
+    strOrder = strOrder + " [#1]" + productTitle[0] + ":" +input1.value;
     amount = amount + parseInt(input1.value);
+
+    // update amonut
+    updateAmount(1, parseInt(productAmount[0]),parseInt(input1.value));
   }
   else {
     strOrder = strOrder;
@@ -284,8 +314,11 @@ function setOrder(){
 
 
   if(checkbox2.checked) {
-    strOrder = strOrder + " #2:" +input2.value;
+    strOrder = strOrder + " [#2]" + productTitle[1] + ":" +input2.value;
     amount = amount + parseInt(input2.value);
+
+    // update amonut
+    updateAmount(2, parseInt(productAmount[1]),parseInt(input2.value));
   }
   else {
     strOrder = strOrder;
@@ -293,8 +326,11 @@ function setOrder(){
   }
 
   if(checkbox3.checked) {
-    strOrder = strOrder + " #3:" +input3.value;
+    strOrder = strOrder + " [#3]" + productTitle[2] + ":" +input3.value;
     amount = amount + parseInt(input3.value);
+
+    // update amonut
+    updateAmount(3, parseInt(productAmount[2]),parseInt(input3.value));
   }
   else {
     strOrder = strOrder;
@@ -302,8 +338,11 @@ function setOrder(){
   }
 
   if(checkbox4.checked) {
-    strOrder = strOrder + " #4:" +input4.value;
+    strOrder = strOrder + " [#4]" + productTitle[3] + ":" +input4.value;
     amount = amount + parseInt(input4.value);
+
+    // update amonut
+    updateAmount(4, parseInt(productAmount[3]),parseInt(input4.value));
   }
   else {
     strOrder = strOrder;
@@ -311,8 +350,11 @@ function setOrder(){
   }
 
   if(checkbox5.checked) {
-    strOrder = strOrder + " #5:" +input5.value;
+    strOrder = strOrder + " [#5]" + productTitle[4] + ":" +input5.value;
     amount = amount + parseInt(input5.value);
+
+    // update amonut
+    updateAmount(5, parseInt(productAmount[4]),parseInt(input5.value));
   }
   else {
     strOrder = strOrder;
@@ -320,8 +362,11 @@ function setOrder(){
   }
 
   if(checkbox6.checked) {
-    strOrder = strOrder + " #2:" +input6.value;
+    strOrder = strOrder + " [#6]" + productTitle[5] + ":" +input6.value;
     amount = amount + parseInt(input6.value);
+
+    // update amonut
+    updateAmount(5, parseInt(productAmount[4]),parseInt(input5.value));
   }
   else {
     strOrder = strOrder;
@@ -329,8 +374,11 @@ function setOrder(){
   }
 
   if(checkbox7.checked) {
-    strOrder = strOrder + " #2:" +input7.value;
+    strOrder = strOrder + " [#7]" + productTitle[6] + ":" +input7.value;
     amount = amount + parseInt(input7.value);
+
+    // update amonut
+    updateAmount(7, parseInt(productAmount[6]),parseInt(input7.value));
   }
   else {
     strOrder = strOrder;
@@ -338,8 +386,11 @@ function setOrder(){
   }
 
   if(checkbox8.checked) {
-    strOrder = strOrder + " #2:" +input8.value;
+    strOrder = strOrder + " [#8]" + productTitle[7] + ":" +input8.value;
     amount = amount + parseInt(input8.value);
+
+    // update amonut
+    updateAmount(8, parseInt(productAmount[7]),parseInt(input8.value));
   }
   else {
     strOrder = strOrder;
@@ -347,8 +398,11 @@ function setOrder(){
   }
 
   if(checkbox9.checked) {
-    strOrder = strOrder + " #2:" +input9.value;
+    strOrder = strOrder + " [#9]" + productTitle[8] + ":" +input9.value;
     amount = amount + parseInt(input9.value);
+
+    // update amonut
+    updateAmount(9, parseInt(productAmount[8]),parseInt(input9.value));
   }
   else {
     strOrder = strOrder;
@@ -356,8 +410,11 @@ function setOrder(){
   }
 
   if(checkbox10.checked) {
-    strOrder = strOrder + " #2:" +input10.value;
+    strOrder = strOrder + " [#10]" + productTitle[9] + ":" +input10.value;
     amount = amount + parseInt(input10.value);
+
+    // update amonut
+    updateAmount(10, parseInt(productAmount[9]),parseInt(input10.value));
   }
   else {
     strOrder = strOrder;
@@ -366,8 +423,11 @@ function setOrder(){
 
 
   if(checkbox11.checked) {
-    strOrder = strOrder + " #2:" +input11.value;
+    strOrder = strOrder + " [#11]" + productTitle[10] + ":" +input11.value;
     amount = amount + parseInt(input11.value);
+
+    // update amonut
+    updateAmount(11, parseInt(productAmount[10]),parseInt(input11.value));
   }
   else {
     strOrder = strOrder;
@@ -376,8 +436,11 @@ function setOrder(){
 
 
   if(checkbox12.checked) {
-    strOrder = strOrder + " #2:" +input12.value;
+    strOrder = strOrder + " [#12]" + productTitle[11] + ":" +input12.value;
     amount = amount + parseInt(input12.value);
+
+    // update amonut
+    updateAmount(12, parseInt(productAmount[11]),parseInt(input12.value));
   }
   else {
     strOrder = strOrder;
@@ -386,8 +449,11 @@ function setOrder(){
 
 
   if(checkbox13.checked) {
-    strOrder = strOrder + " #2:" +input13.value;
+    strOrder = strOrder + " [#13]" + productTitle[12] + "" +input13.value;
     amount = amount + parseInt(input13.value);
+
+    // update amonut
+    updateAmount(13, parseInt(productAmount[12]),parseInt(input13.value));
   }
   else {
     strOrder = strOrder;
@@ -395,8 +461,11 @@ function setOrder(){
   }
 
   if(checkbox14.checked) {
-    strOrder = strOrder + " #2:" +input14.value;
+    strOrder = strOrder + " [#14]" + productTitle[13] + ":" +input14.value;
     amount = amount + parseInt(input14.value);
+
+    // update amonut
+    updateAmount(14, parseInt(productAmount[13]),parseInt(input14.value));
   }
   else {
     strOrder = strOrder;
@@ -404,8 +473,11 @@ function setOrder(){
   }
 
   if(checkbox15.checked) {
-    strOrder = strOrder + " #2:" +input15.value;
+    strOrder = strOrder + " [#15]" + productTitle[14] + ":" +input15.value;
     amount = amount + parseInt(input15.value);
+
+    // update amonut
+    updateAmount(15, parseInt(productAmount[14]),parseInt(input15.value));
   }
   else {
     strOrder = strOrder;
@@ -413,8 +485,11 @@ function setOrder(){
   }
 
   if(checkbox16.checked) {
-    strOrder = strOrder + " #2:" +input16.value;
+    strOrder = strOrder + " [#16]" + productTitle[15] + ":" +input16.value;
     amount = amount + parseInt(input16.value);
+
+    // update amonut
+    updateAmount(16, parseInt(productAmount[15]),parseInt(input16.value));
   }
   else {
     strOrder = strOrder;
@@ -422,8 +497,11 @@ function setOrder(){
   }
 
   if(checkbox17.checked) {
-    strOrder = strOrder + " #2:" +input17.value;
+    strOrder = strOrder + " [#17]" + productTitle[16] + ":" +input17.value;
     amount = amount + parseInt(input17.value);
+
+    // update amonut
+    updateAmount(17, parseInt(productAmount[16]),parseInt(input17.value));
   }
   else {
     strOrder = strOrder;
@@ -431,8 +509,11 @@ function setOrder(){
   }
 
   if(checkbox18.checked) {
-    strOrder = strOrder + " #2:" +input18.value;
+    strOrder = strOrder + " [#18]" + productTitle[17] + ":" +input18.value;
     amount = amount + parseInt(input18.value);
+
+    // update amonut
+    updateAmount(18, parseInt(productAmount[17]),parseInt(input18.value));
   }
   else {
     strOrder = strOrder;
@@ -440,8 +521,11 @@ function setOrder(){
   }
 
   if(checkbox19.checked) {
-    strOrder = strOrder + " #2:" +input19.value;
+    strOrder = strOrder + " [#19]" + productTitle[18] + ":" +input19.value;
     amount = amount + parseInt(input19.value);
+
+    // update amonut
+    updateAmount(19, parseInt(productAmount[18]),parseInt(input19.value));
   }
   else {
     strOrder = strOrder;
@@ -449,8 +533,11 @@ function setOrder(){
   }
 
   if(checkbox20.checked) {
-    strOrder = strOrder + " #2:" +input20.value;
+    strOrder = strOrder + " [#20]" + productTitle[19] + ":" +input20.value;
     amount = amount + parseInt(input20.value);
+
+    // update amonut
+    updateAmount(20, parseInt(productAmount[19]),parseInt(input20.value));
   }
   else {
     strOrder = strOrder;
@@ -458,8 +545,11 @@ function setOrder(){
   }
 
   if(checkbox21.checked) {
-    strOrder = strOrder + " #2:" +input21.value;
+    strOrder = strOrder + " [#21]" + productTitle[20] + ":" +input21.value;
     amount = amount + parseInt(input21.value);
+
+    // update amonut
+    updateAmount(21, parseInt(productAmount[20]),parseInt(input21.value));
   }
   else {
     strOrder = strOrder;
@@ -467,8 +557,11 @@ function setOrder(){
   }
 
   if(checkbox22.checked) {
-    strOrder = strOrder + " #2:" +input22.value;
+    strOrder = strOrder + " [#22]" + productTitle[21] + ":" +input22.value;
     amount = amount + parseInt(input22.value);
+
+    // update amonut
+    updateAmount(22, parseInt(productAmount[21]),parseInt(input22.value));
   }
   else {
     strOrder = strOrder;
@@ -496,11 +589,24 @@ function setOrder(){
     total: total,
   })
 
-  // Update
+  // Update id
   updateId();
 
   // Affter send date will show data at log again
   getDataOrder();
+}
+
+function updateAmount(keyOfProduct, currentNumber, numberOfSales){
+
+  // On Product
+  var dbProductRef = firebase.database().ref("products/" + keyOfProduct);
+
+  // New amount
+  var newAmount = currentNumber - numberOfSales;
+
+  dbProductRef.update({
+    amount: newAmount,
+  })
 }
 
 function updateId(){
@@ -511,7 +617,6 @@ function updateId(){
   dbInfoRef.update({
     curentId: curentId,
   })
-
 }
 
 function hanndleOnChangeCheckBox(position){
